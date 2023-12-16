@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: postgresql://localhost:5432/mydb
+    password: 1234
+    username: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+logging:
+  level:
+    org.hibernate.SQL: debug
