@@ -1,12 +1,15 @@
 spring:
   datasource:
-    url: postgresql://localhost:5432/mydb
-    password: 1234
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: postgres
     username: postgres
 
   jpa:
     hibernate:
       ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
 logging:
   level:
     org.hibernate.SQL: debug
