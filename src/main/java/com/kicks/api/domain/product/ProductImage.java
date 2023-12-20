@@ -5,9 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductImage {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +16,9 @@ public class ProductImage {
     @JoinColumn(name = "product_id")
     private ShoeProduct product;
     private String url;
+
+    public ProductImage(ShoeProduct product, String url) {
+        this.product = product;
+        this.url = url;
+    }
 }

@@ -5,9 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Brand {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +16,11 @@ public class Brand {
     @Lob
     private String info;
     private String logoUrl;
+
+    @Builder
+    public Brand(String name, String info, String logoUrl) {
+        this.name = name;
+        this.info = info;
+        this.logoUrl = logoUrl;
+    }
 }

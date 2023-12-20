@@ -10,10 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
@@ -33,9 +29,7 @@ public class InitData {
                         "세계적인 브랜드로 성장했습니다.")
                 .logoUrl("https://image.msscdn.net/mfile_s01/_brand/free_medium/vans.png?202312040947")
                 .build();
-        Category category = Category.builder()
-                .name("스니커즈")
-                .build();
+        Category category  = new Category("스니커즈");
 
         brandRepository.save(brand);
         categoryRepository.save(category);
@@ -51,38 +45,16 @@ public class InitData {
                         "풋베드는 25%의 친환경 소재의 EVA폼으로 만들어져 하루종일 편안한 착용감을 제공합니다.\n" +
                         "아웃솔은 자연고무로부터 생산되는 등 VR3는 지속가능성에 초점을 두었습니다.")
                 .gender(Gender.ALL)
-                .productList(new ArrayList<>())
-                .build();
-        ShoeProduct product = ShoeProduct.builder()
-                .productId("VN0A4BX5BPS1")
-                .family(family)
-                .colorKo("블랙:마쉬멜로우")
-                .colorEn("BLACK/MARSHMALLOW")
-                .stockList(new ArrayList<>())
-                .imageList(new ArrayList<>())
-                .build();
-        ShoeStock stock = ShoeStock.builder()
-                .product(product)
-                .size(225)
-                .price(54900)
-                .quantity(10)
-                .build();
-        ProductImage image1 = ProductImage.builder()
-                .product(product)
-                .url("https://image.msscdn.net/images/goods_img/20231016/3630145/3630145_16989987496741_500.jpg")
                 .build();
 
-        family.getProductList().add(product);
-        product.getImageList().add(image1);
-        product.getStockList().add(stock);
+        ShoeProduct newProduct = family.addNewProduct("VN0A4BX5BPS1", "블랙:마쉬멜로우", "VN0A4BX5BPS1");
+        newProduct.addNewStock(255, 54900, 10);
+        newProduct.addNewImage("https://image.msscdn.net/images/goods_img/20231016/3630145/3630145_16989987496741_500.jpg");
+        newProduct.addNewImage("https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987585918_500.jpg");
+        newProduct.addNewImage("https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987539697_500.jpg");
+        newProduct.addNewImage("https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987554496_500.jpg");
 
         shoeRepository.save(family);
-
-//        imageSet.setMainImage("https://image.msscdn.net/images/goods_img/20231016/3630145/3630145_16989987496741_500.jpg");
-//        imageSet.setDetailImage(1, "https://image.msscdn.net/images/goods_img/20231016/3630145/3630145_16989987496741_500.jpg");
-//        imageSet.setDetailImage(2, "https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987585918_500.jpg");
-//        imageSet.setDetailImage(3, "https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987539697_500.jpg");
-//        imageSet.setDetailImage(4, "https://image.msscdn.net/images/prd_img/20231016/3630145/detail_3630145_16989987554496_500.jpg");
 
         log.info("[InitData] database initialized.");
     }

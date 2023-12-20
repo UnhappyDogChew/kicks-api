@@ -5,9 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +13,8 @@ public class Category {
     private Long id;
 
     private String name;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

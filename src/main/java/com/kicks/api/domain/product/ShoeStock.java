@@ -5,9 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ShoeStock {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +21,11 @@ public class ShoeStock {
     private int price;
 
     private int quantity;
+
+    public ShoeStock(ShoeProduct product, int size, int price, int quantity) {
+        this.product = product;
+        this.size = size;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
